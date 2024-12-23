@@ -7,6 +7,6 @@ terraform {
   }
   backend "gcs" {
     bucket = "onyx-descent-417702-terra-bucket"
-    prefix  = "terraform/state"
+    prefix = "terraform/state"
   }
 }

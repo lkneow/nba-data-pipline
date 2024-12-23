@@ -181,3 +181,6 @@ crash.*.log
 
 data
 google-cloud-sdk
+creds*
+logs
+plugins
