@@ -120,46 +120,33 @@ with DAG(
         if not file_list:
             raise ValueError("No CSV files found in GCS.")
         return file_list
-
-    def sanitize_table_name(file_name):
-        """Sanitize file name to create a valid BigQuery table name."""
-        table_name = re.sub(r"[^a-zA-Z0-9_]", "_", file_name.split("/")[-1].replace(".csv", ""))
-        final_table_name = f"{GCP_PROJECT_ID}.{BIGQUERY_DATASET}.{table_name}"
-        return final_table_name
-
-    # Step 1: List files in GCS
-    gcs_files = list_gcs_files(GCS_BUCKET)
-
-    # Step 2: Dynamically map tasks
-    create_mapped_tasks = GCSToBigQueryOperator.partial(
-        task_id="load_file_to_bq",
-        bucket=GCS_BUCKET,
-        source_format="CSV",
-        skip_leading_rows=1,
-        write_disposition="WRITE_TRUNCATE",
-        autodetect=True,
-    ).expand(
-        source_objects=gcs_files,
-        destination_project_dataset_table=gcs_files.map(sanitize_table_name),
-    )
+    
+    gcs_files = list_gcs_files(bucket_name=GCS_BUCKET)
         
+    # example from https://github.com/astronomer/webinar-task-groups/blob/main/dags/task_group_mapping_use_case.py
+    @task_group(group_id="get_table_name_and_load_to_bq")
+    def get_table_name_and_load_to_bq(file_name):
+        @task
+        def generate_table_name(file_name: str) -> str:
+            """Generates sanitized BigQuery table names from GCS file names."""
+            table_name = re.sub(r"[^a-zA-Z0-9_]", "_", file_name.split("/")[-1].replace(".csv", ""))
+            final_table_names=f"{GCP_PROJECT_ID}.{BIGQUERY_DATASET}.{table_name}"
+            return final_table_names
 
-    # with TaskGroup("load_files_to_bigquery") as load_files_group:
-    #     for file_name in file_paths:
-    #         # Sanitize file name to generate a valid BigQuery table name
-    #         table_name = re.sub(r"[^a-zA-Z0-9_]", "_", file_name.split("/")[-1].replace(".csv", ""))
-
-    #         # Add a task for each file
-    #         GCSToBigQueryOperator(
-    #             task_id=f"load_{table_name}_to_bq",
-    #             bucket=GCS_BUCKET,
-    #             source_objects=[file_name],
-    #             destination_project_dataset_table=f"{GCP_PROJECT_ID}.{BIGQUERY_DATASET}.{table_name}",
-    #             source_format="CSV",
-    #             skip_leading_rows=1,
-    #             write_disposition="WRITE_TRUNCATE",
-    #             autodetect=True,
-    #         )
-
+        table_name = generate_table_name(file_name)
+        
+        load_to_bq = GCSToBigQueryOperator(
+            task_id="load_csv_to_bq",
+            bucket=GCS_BUCKET,
+            source_format="CSV",
+            skip_leading_rows=1,
+            write_disposition="WRITE_TRUNCATE",
+            autodetect=True,
+            source_objects=[file_name],
+            destination_project_dataset_table=table_name
+        )
+        
+        table_name >> load_to_bq
+    tg_object = get_table_name_and_load_to_bq.expand(file_name=gcs_files)
     # Define task dependencies
-    download_task >> extract_task >> upload_to_gcs_task >> create_mapped_tasks
+    download_task >> extract_task >> upload_to_gcs_task >> gcs_files >> tg_object

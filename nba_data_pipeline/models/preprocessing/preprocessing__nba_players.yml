@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: preprocessing__nba_players
+    description: Preprocessed NBA players table
+    columns:
+      - name: player_id
+        description: Player ID. e.g. 2544
+      - name: player_name
+        description: Player name. e.g. LeBron James
+      - name: team_id
+        description: ID of team that player is playing for. e.g. 1610612747
+      - name: season_year
+        description: Year that player is playing in. e.g. 2020

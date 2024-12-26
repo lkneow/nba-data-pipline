@@ -1,0 +1,45 @@
+version: 2
+models:
+  - name: preprocessing__nba_games
+    description: Preprocessed games table. Shows final stats of each nba game
+    columns:
+      - name: game_id
+        description: Unique identifier for the game. e.g. 0021900001
+      - name: game_date_est
+        description: Date of the game in EST timezone. e.g. 2023-12-01
+      - name: game_status
+        description: Status text of the game. e.g. Final
+      - name: game_season
+        description: Season during which the game was played. e.g. 2023
+      - name: team_id_home
+        description: ID of the home team. e.g. 1610612747
+      - name: team_id_away
+        description: ID of the away team. e.g. 1610612738
+      - name: points_home
+        description: Total points scored by the home team. e.g. 120
+      - name: field_goal_pct_home
+        description: Field goal percentage for the home team. e.g. 0.450
+      - name: free_throw_pct_home
+        description: Free throw percentage for the home team. e.g. 0.800
+      - name: three_point_fg_pct_home
+        description: Three-point field goal percentage for the home team. e.g. 0.350
+      - name: assists_home
+        description: Total assists by the home team. e.g. 25
+      - name: rebounds_home
+        description: Total rebounds by the home team. e.g. 48
+      - name: team_id_away
+        description: ID of the away team. e.g. 1610612737
+      - name: points_away
+        description: Total points scored by the away team. e.g. 115
+      - name: field_goal_pct_away
+        description: Field goal percentage for the away team. e.g. 0.430
+      - name: free_throw_pct_away
+        description: Free throw percentage for the away team. e.g. 0.750
+      - name: three_point_fg_pct_away
+        description: Three-point field goal percentage for the away team. e.g. 0.360
+      - name: assists_away
+        description: Total assists by the away team. e.g. 22
+      - name: rebounds_away
+        description: Total rebounds by the away team. e.g. 42
+      - name: home_team_wins
+        description: Boolean. True if home team wins

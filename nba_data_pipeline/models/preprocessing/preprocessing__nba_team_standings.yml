@@ -1,0 +1,37 @@
+version: 2
+models:
+  - name: preprocessing__nba_team_standings
+    description: Preprocessed nba team standings table. Shows team standings, W, L stats as of standings_date
+    columns:
+      - name: team_id
+        description: Unique identifier for the team. e.g. 161061274
+      - name: season_id
+        description: Identifier for the season. e.g. 22022
+      - name: standings_date
+        description: Date of the standings record. e.g. 2020-08-15
+      - name: conference
+        description: Conference the team belongs to. e.g. West or East
+      - name: games_played
+        description: Total games played by the team as an integer. e.g. 82
+      - name: wins
+        description: Total wins by the team as an integer. e.g. 50
+      - name: losses
+        description: Total losses by the team as an integer. e.g. 32
+      - name: win_percentage
+        description: Win percentage for the team, rounded to 3 decimal places. e.g. 0.610
+      - name: home_record
+        description: Home record of the team in the format W-L. e.g. 25-10
+      - name: home_wins
+        description: Total wins at home as an integer. Derived from home_record. e.g. 25
+      - name: home_losses
+        description: Total losses at home as an integer. Derived from home_record. e.g. 10
+      - name: home_win_percentage
+        description: Home win percentage, rounded to 3 decimal places. Derived from home_record. e.g. 0.714
+      - name: road_record
+        description: Road record of the team in the format W-L. e.g. 20-15
+      - name: road_wins
+        description: Total wins on the road as an integer. Derived from road_record. e.g. 20
+      - name: road_losses
+        description: Total losses on the road as an integer. Derived from road_record. e.g. 15
+      - name: road_win_percentage
+        description: Road win percentage, rounded to 3 decimal places. Derived from road_record. e.g. 0.571

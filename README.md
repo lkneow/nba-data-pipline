@@ -1,6 +1,9 @@
 # nba-data-pipline
 NBA data pipeline practice
 
+# Data
+Taken from https://www.kaggle.com/datasets/nathanlauga/nba-games
+
 # What I did
 
 Python version: 3.12.1
@@ -25,5 +28,11 @@ Install [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-
 Install [docker](https://docs.docker.com/engine/install/ubuntu/), [docker compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
 - These come preinstalled in github codespaces. Install if required
 - relevant commands
-    - docker compose up
-    - docker compose down --rmi all
+    ``` 
+    docker compose up
+    docker compose down --rmi all
+    ```
+
+Set up dbt with [dbt init](https://docs.getdbt.com/reference/commands/init)
+- Moved [profiles.yml](nba_data_pipeline/profiles.yml) to the dbt project folder
+- added `flags: send_anonymous_usage_stats: False`

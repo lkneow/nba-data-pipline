@@ -1,0 +1,42 @@
+version: 2
+models:
+  - name: core__nba_game_stats
+    description: NBA team stats for each game
+    columns:
+      - name: game_id
+        description: Unique identifier for the game. e.g. 123456
+      - name: team_id
+        description: Unique identifier for the team. e.g. 1610612747
+      - name: total_fgm
+        description: Total field goals made by the team in the game. e.g. 45
+      - name: total_fga
+        description: Total field goals attempted by the team in the game. e.g. 90
+      - name: total_three_pointers_made
+        description: Total three-pointers made by the team in the game. e.g. 12
+      - name: total_three_pointers_attempted
+        description: Total three-pointers attempted by the team in the game. e.g. 36
+      - name: total_free_throws_made
+        description: Total free throws made by the team in the game. e.g. 18
+      - name: total_free_throws_attempted
+        description: Total free throws attempted by the team in the game. e.g. 22
+      - name: total_offensive_rebounds
+        description: Total offensive rebounds by the team in the game. e.g. 12
+      - name: total_defensive_rebounds
+        description: Total defensive rebounds by the team in the game. e.g. 28
+      - name: total_total_rebounds
+        description: Total rebounds (offensive + defensive) by the team in the game. e.g. 40
+      - name: total_assists
+        description: Total assists by the team in the game. e.g. 25
+      - name: total_steals
+        description: Total steals by the team in the game. e.g. 8
+      - name: total_blocks
+        description: Total blocks by the team in the game. e.g. 5
+      - name: total_turnovers
+        description: Total turnovers by the team in the game. e.g. 14
+      - name: total_personal_fouls
+        description: Total personal fouls committed by the team in the game. e.g. 20
+      - name: total_points
+        description: Total points scored by the team in the game. e.g. 110
+      - name: total_plus_minus
+        description: Total plus/minus value for the team in the game. e.g. 15
+

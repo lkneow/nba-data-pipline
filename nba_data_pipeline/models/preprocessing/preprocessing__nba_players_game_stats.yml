@@ -1,0 +1,61 @@
+version: 2
+models:
+  - name: preprocessing__nba_players_game_stats
+    description: Preprocessed NBA player games stats table. Shows final stats of each nba game for each player
+    columns:
+      - name: game_id
+        description: Unique identifier for the game. e.g. 0021900001
+      - name: team_id
+        description: ID of the team the player is associated with. e.g. 1610612747
+      - name: team_abbreviation
+        description: Abbreviation of the team's name. e.g. LAL for Los Angeles Lakers
+      - name: player_id
+        description: Unique identifier for the player. e.g. 2544
+      - name: player_name
+        description: Full name of the player. e.g. LeBron James
+      - name: nickname
+        description: Player's nickname. e.g. LeBron
+      - name: start_position
+        description: Starting position of the player. e.g. SF
+      - name: dnp_comment
+        description: Comments if player DNP. e.g. DNP - Coach's Decision
+      - name: minutes_played
+        description: Total minutes played by the player. e.g. 35:20
+      - name: field_goals_made
+        description: Total field goals made by the player as an integer. e.g. 10
+      - name: field_goals_attempted
+        description: Total field goals attempted by the player as an integer. e.g. 20
+      - name: field_goal_percentage
+        description: Field goal percentage for the player, rounded to 3 decimal places. e.g. 0.500
+      - name: three_pointers_made
+        description: Total three-point field goals made by the player as an integer. e.g. 3
+      - name: three_pointers_attempted
+        description: Total three-point field goals attempted by the player as an integer. e.g. 8
+      - name: three_point_percentage
+        description: Three-point field goal percentage for the player, rounded to 3 decimal places. e.g. 0.375
+      - name: free_throws_made
+        description: Total free throws made by the player as an integer. e.g. 5
+      - name: free_throws_attempted
+        description: Total free throws attempted by the player as an integer. e.g. 6
+      - name: free_throw_percentage
+        description: Free throw percentage for the player, rounded to 3 decimal places. e.g. 0.833
+      - name: offensive_rebounds
+        description: Total offensive rebounds by the player as an integer. e.g. 3
+      - name: defensive_rebounds
+        description: Total defensive rebounds by the player as an integer. e.g. 7
+      - name: total_rebounds
+        description: Total rebounds by the player (offensive + defensive) as an integer. e.g. 10
+      - name: assists
+        description: Total assists by the player as an integer. e.g. 8
+      - name: steals
+        description: Total steals by the player as an integer. e.g. 2
+      - name: blocks
+        description: Total blocks by the player as an integer. e.g. 1
+      - name: turnovers
+        description: Total turnovers committed by the player as an integer. e.g. 4
+      - name: personal_fouls
+        description: Total personal fouls committed by the player as an integer. e.g. 2
+      - name: points
+        description: Total points scored by the player as an integer. e.g. 28
+      - name: plus_minus
+        description: Plus-minus statistic indicating the player's on-court impact as an integer. e.g. 12 or -12
