@@ -17,17 +17,21 @@ SELECT
     CAST(SPLIT(HOME_RECORD, '-')[OFFSET(0)] AS INT) AS home_wins,
     CAST(SPLIT(HOME_RECORD, '-')[OFFSET(1)] AS INT) AS home_losses,
     ROUND(
-        CAST(SPLIT(HOME_RECORD, '-')[OFFSET(0)] AS FLOAT) /
-        (CAST(SPLIT(HOME_RECORD, '-')[OFFSET(0)] AS FLOAT) + CAST(SPLIT(HOME_RECORD, '-')[OFFSET(1)] AS FLOAT)),
+        SAFE_DIVIDE(
+            CAST(SPLIT(HOME_RECORD, '-')[OFFSET(0)] AS NUMERIC),
+            (CAST(SPLIT(HOME_RECORD, '-')[OFFSET(0)] AS NUMERIC) + CAST(SPLIT(HOME_RECORD, '-')[OFFSET(1)] AS NUMERIC))
+        ),
         3
-    ) AS home_win_percentage
+    ) AS home_win_percentage,
     ROAD_RECORD AS road_record,
     CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(0)] AS INT) AS road_wins,
     CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(1)] AS INT) AS road_losses,
     ROUND(
-        CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(0)] AS FLOAT) /
-        (CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(0)] AS FLOAT) + CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(1)] AS FLOAT)),
+        SAFE_DIVIDE(
+            CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(0)] AS NUMERIC),
+            (CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(0)] AS NUMERIC) + CAST(SPLIT(ROAD_RECORD, '-')[OFFSET(1)] AS NUMERIC))
+        ),
         3
     ) AS road_win_percentage
 
-FROM `{{ project() }}.nba_pipeline_dataset.ranking`
+FROM `{{ project() }}.{{ dataset_raw() }}.ranking`

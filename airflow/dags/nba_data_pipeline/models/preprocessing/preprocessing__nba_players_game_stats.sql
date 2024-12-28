@@ -33,4 +33,4 @@ SELECT
     CAST(PTS AS INT) AS points,
     CAST(PLUS_MINUS AS INT) AS plus_minus
 
-FROM `{{ project() }}.nba_pipeline_dataset.games_details`
+FROM `{{ project() }}.{{ dataset_raw() }}.games_details`

@@ -38,5 +38,11 @@ RUN chmod +x scripts
 ARG AIRFLOW_UID=1000
 USER $AIRFLOW_UID
 
+ARG DBT_CORE_VER=1.9.1
+ARG DBT_BQ_VER=1.9.0
+
+RUN python -m venv dbt_venv && source dbt_venv/bin/activate && \
+    pip install --no-cache-dir dbt-core==$DBT_CORE_VER dbt-bigquery==$DBT_BQ_VER && deactivate
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt

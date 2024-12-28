@@ -16,3 +16,9 @@ Following the no frills setup [here](https://github.com/DataTalksClub/data-engin
 ## Credentials
 There is a creds folder with service account credentials as google_credentials.json
 
+## References
+astronomer cosmos documentation: https://astronomer.github.io/astronomer-cosmos/getting_started/index.html
+
+elt bigquery dbt: https://www.astronomer.io/docs/learn/reference-architecture-elt-bigquery-dbt/
+
+astronomer cosmos simple dag example: https://github.com/astronomer/cosmos-demo/blob/main/dags/basic/simple_dag.py

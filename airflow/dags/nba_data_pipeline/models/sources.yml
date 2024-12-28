@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: nba_pipeline_dataset_raw
+    database: onyx-descent-417702  
+    schema: nba_pipeline_dataset_raw  
+    tables:
+      - name: games
+      - name: players
+      - name: teams
+      - name: ranking 
+      - name: games_details

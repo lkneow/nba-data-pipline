@@ -17,5 +17,5 @@ SELECT
     DLEAGUEAFFILIATION AS d_league_team_name,
     MAX_YEAR AS max_year
     
-FROM `{{ project() }}.nba_pipeline_dataset.teams`
+FROM `{{ project() }}.{{ dataset_raw() }}.teams`
 
