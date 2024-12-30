@@ -39,4 +39,3 @@ models:
         description: Total points scored by the team in the game. e.g. 110
       - name: total_plus_minus
         description: Total plus/minus value for the team in the game. e.g. 15
-

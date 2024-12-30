@@ -24,4 +24,4 @@ SELECT
     AST_away AS assists_away,
     REB_away AS rebounds_away,
     HOME_TEAM_WINS = 1 AS home_team_wins
-FROM `{{ project() }}.{{ dataset_raw() }}.games`
+FROM {{ source('nba_pipeline_dataset_raw', 'games') }}

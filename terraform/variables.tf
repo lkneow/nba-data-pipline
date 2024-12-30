@@ -19,3 +19,7 @@ variable "tf_backend_gcs_bucket_name" {
 variable "data_gcs_bucket_name" {
   description = "data GCS Bucket name"
 }
+
+variable "dbt_docs_bucket_name" {
+  description = "dbt docs GCS Bucket name"
+}

@@ -7,6 +7,8 @@ Created a few files
 - [`main.tf`](main.tf)
 - [`variables.tf`](variables.tf)
 - `terraform.tfvars` (this is in .gitignore)
+- [`bq.tf`](bq.tf)
+- [`sa.tf`](sa.tf)
 
 In order to have the terraform state to be store in gcs, we have to first create the bucket
 

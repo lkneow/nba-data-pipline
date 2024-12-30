@@ -4,6 +4,10 @@
     )
 }}
 
+{#-
+/*There are duplicates in the source due to different rounding in PCT columns. Removing it here
+    distinct doesn't work since some data is different. Using qualify
+*/ -#}
 SELECT
     GAME_ID AS game_id,
     TEAM_ID AS team_id,
@@ -33,4 +37,10 @@ SELECT
     CAST(PTS AS INT) AS points,
     CAST(PLUS_MINUS AS INT) AS plus_minus
 
-FROM `{{ project() }}.{{ dataset_raw() }}.games_details`
+FROM {{ source('nba_pipeline_dataset_raw', 'games_details') }}
+QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY
+        GAME_ID,
+        TEAM_ID,
+        PLAYER_ID
+) = 1

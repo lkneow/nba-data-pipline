@@ -12,9 +12,19 @@ Following the no frills setup [here](https://github.com/DataTalksClub/data-engin
 - Note the airflow and gcloud sdk version in [Dockerfile](Dockerfile)
     - pip moved to after AIRFLOW_UID since it can't run with root?
 - Note the location of creds in [docker-compose.yaml](docker-compose.yaml)
+- dbt docs are hosted following the [instructions shown](https://astronomer.github.io/astronomer-cosmos/configuration/hosting-docs.html) on the astronmer-cosmos documentation page
 
-## Credentials
-There is a creds folder with service account credentials as google_credentials.json
+## Commands
+
+To start the local airflow instance
+```
+docker compose up
+```
+
+To shut down the airflow instance and remove all related images
+```
+docker compose down --rmi all
+```
 
 ## References
 astronomer cosmos documentation: https://astronomer.github.io/astronomer-cosmos/getting_started/index.html
@@ -22,3 +32,8 @@ astronomer cosmos documentation: https://astronomer.github.io/astronomer-cosmos/
 elt bigquery dbt: https://www.astronomer.io/docs/learn/reference-architecture-elt-bigquery-dbt/
 
 astronomer cosmos simple dag example: https://github.com/astronomer/cosmos-demo/blob/main/dags/basic/simple_dag.py
+
+## Issues
+
+astronomer-cosmos 1.8.0 has a [bug](https://github.com/astronomer/astronomer-cosmos/issues/1420)
+- issue with `DbtDocsGCSOperator`

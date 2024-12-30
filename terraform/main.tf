@@ -36,3 +36,24 @@ resource "google_storage_bucket" "data-storage-bucket" {
     }
   }
 }
+
+resource "google_storage_bucket" "dbt-docs-bucket" {
+  name                        = var.dbt_docs_bucket_name
+  location                    = var.project_location
+  force_destroy               = true
+  storage_class               = "STANDARD"
+  uniform_bucket_level_access = true
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    condition {
+      age = 1
+    }
+    action {
+      type = "AbortIncompleteMultipartUpload"
+    }
+  }
+}

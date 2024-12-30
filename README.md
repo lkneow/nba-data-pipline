@@ -1,10 +1,10 @@
 # nba-data-pipline
 NBA data pipeline practice
 
-# Data
+## Data
 Taken from https://www.kaggle.com/datasets/nathanlauga/nba-games
 
-# What I did
+## What I did
 
 Python version: 3.12.1
 - This is the version on github codespace
@@ -28,11 +28,26 @@ Install [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-
 Install [docker](https://docs.docker.com/engine/install/ubuntu/), [docker compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
 - These come preinstalled in github codespaces. Install if required
 - relevant commands
-    ``` 
+    ```
     docker compose up
     docker compose down --rmi all
     ```
 
 Set up dbt with [dbt init](https://docs.getdbt.com/reference/commands/init)
-- Moved [profiles.yml](nba_data_pipeline/profiles.yml) to the dbt project folder
+- model folder moved to [airflow/dags](/airflow/dags) to use [astronomer-cosmos](https://astronomer.github.io/astronomer-cosmos/)
+- Moved [profiles.yml](/airflow/dags/nba_data_pipeline/profiles.yml) to the dbt project folder. was originally under `~/.dbt`
 - added `flags: send_anonymous_usage_stats: False`
+
+Set up airflow
+- [README](/airflow/README.md) in the folder itself
+
+## The DAGS
+
+### [data_ingestion_gcp.py](/airflow/dags/data_ingestion_gcp.py)
+![load_to_gcs_dag](/img/load_to_gcs_dag.PNG)
+
+### [nba_data_pipeline_dbt_dag](/airflow/dags/nba_data_pipeline_dbt_dag.py)
+![nba_data_pipeline_dbt_dag](/img/nba_data_pipeline_dbt_dag.PNG)
+
+## dbt lineage
+![dbt_lineage](/img/dbt_lineage.PNG)

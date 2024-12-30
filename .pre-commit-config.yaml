@@ -1,0 +1,21 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: detect-private-key
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.8.4
+  hooks:
+    - id: ruff
+      types_or: [ python, pyi ]
+      args: [ --fix ]
+    - id: ruff-format
+      types_or: [ python, pyi ]
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 3.3.0
+  hooks:
+    - id: sqlfluff-lint
+    # - id: sqlfluff-fix

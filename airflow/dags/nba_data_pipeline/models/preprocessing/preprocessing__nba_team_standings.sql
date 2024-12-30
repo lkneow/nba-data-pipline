@@ -4,6 +4,21 @@
     )
 }}
 
+{#- /*There are duplicates in the source due to different rounding in PCT columns. Removing it here*/ -#}
+WITH ranking_clean AS (
+    SELECT
+        TEAM_ID,
+        SEASON_ID,
+        STANDINGSDATE,
+        CONFERENCE,
+        G,
+        W,
+        L,
+        HOME_RECORD,
+        ROAD_RECORD
+    FROM {{ source('nba_pipeline_dataset_raw', 'games_details') }}
+)
+
 SELECT
     TEAM_ID AS team_id,
     SEASON_ID AS season_id,
@@ -34,4 +49,4 @@ SELECT
         3
     ) AS road_win_percentage
 
-FROM `{{ project() }}.{{ dataset_raw() }}.ranking`
+FROM ranking_clean

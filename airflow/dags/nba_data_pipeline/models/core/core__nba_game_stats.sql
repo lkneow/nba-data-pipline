@@ -26,9 +26,7 @@ SELECT
     SUM(game_stats.steals) AS total_steals,
     SUM(game_stats.blocks) AS total_blocks,
     SUM(game_stats.turnovers) AS total_turnovers,
-    SUM(game_stats.personal_fouls) AS total_personal_fouls,
-    -- SUM(game_stats.points) AS total_points,
-    -- SUM(game_stats.plus_minus) AS total_plus_minus
+    SUM(game_stats.personal_fouls) AS total_personal_fouls
 
 FROM {{ ref('preprocessing__nba_players_game_stats') }} AS game_stats
 LEFT JOIN {{ ref('preprocessing__nba_games') }} AS games_home

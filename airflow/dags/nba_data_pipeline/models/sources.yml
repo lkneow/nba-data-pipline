@@ -2,11 +2,51 @@ version: 2
 
 sources:
   - name: nba_pipeline_dataset_raw
-    database: onyx-descent-417702  
-    schema: nba_pipeline_dataset_raw  
+    description: Raw csv data stored on gsc bucket and loaded onto bigquery
+    database: onyx-descent-417702
+    schema: nba_pipeline_dataset_raw
     tables:
       - name: games
+        description: There are duplicate rows in the csv itself. To remove in downstream
+        columns:
+          - name: GAME_ID
+            data_tests:
+              - not_null
       - name: players
+        data_tests:
+          - unique:
+              column_name: "PLAYER_ID || '_' || TEAM_ID || '_' || SEASON"
+        columns:
+          - name: PLAYER_ID
+            data_tests:
+              - not_null
       - name: teams
-      - name: ranking 
+        columns:
+          - name: TEAM_ID
+            data_tests:
+              - unique
+              - not_null
+      - name: ranking
+        description: There are duplicates for this combination of columns. To remove in downstream
+        columns:
+          - name: TEAM_ID
+            data_tests:
+              - not_null
+          - name: SEASON_ID
+            data_tests:
+              - not_null
+          - name: STANDINGSDATE
+            data_tests:
+              - not_null
       - name: games_details
+        description: There are duplicates for this combination of columns. To remove in downstream
+        columns:
+          - name: GAME_ID
+            data_tests:
+              - not_null
+          - name: TEAM_ID
+            data_tests:
+              - not_null
+          - name: PLAYER_ID
+            data_tests:
+              - not_null

@@ -2,6 +2,9 @@ version: 2
 models:
   - name: preprocessing__nba_team_standings
     description: Preprocessed nba team standings table. Shows team standings, W, L stats as of standings_date
+    data_tests:
+      - unique:
+          column_name: "team_id || '_' || season_id || '_' || standings_date"
     columns:
       - name: team_id
         description: Unique identifier for the team. e.g. 161061274

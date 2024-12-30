@@ -2,6 +2,9 @@ version: 2
 models:
   - name: preprocessing__nba_players_game_stats
     description: Preprocessed NBA player games stats table. Shows final stats of each nba game for each player
+    data_tests:
+      - unique:
+          column_name: "game_id || team_id || player_id"
     columns:
       - name: game_id
         description: Unique identifier for the game. e.g. 0021900001

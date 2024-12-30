@@ -16,6 +16,5 @@ SELECT
     HEADCOACH AS team_head_coach,
     DLEAGUEAFFILIATION AS d_league_team_name,
     MAX_YEAR AS max_year
-    
-FROM `{{ project() }}.{{ dataset_raw() }}.teams`
 
+FROM {{ source('nba_pipeline_dataset_raw', 'teams') }}

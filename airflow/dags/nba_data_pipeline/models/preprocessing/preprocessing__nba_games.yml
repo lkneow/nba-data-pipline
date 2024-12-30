@@ -5,6 +5,9 @@ models:
     columns:
       - name: game_id
         description: Unique identifier for the game. e.g. 0021900001
+        data_tests:
+          - unique
+          - not_null
       - name: game_date_est
         description: Date of the game in EST timezone. e.g. 2023-12-01
       - name: game_status
