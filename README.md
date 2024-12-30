@@ -11,7 +11,7 @@ Python version: 3.12.1
 
 Set up python virtual environment
 
-```
+```bash
 python -m venv .venv
 pip install -r requirements.txt
 ```
@@ -28,7 +28,7 @@ Install [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-
 Install [docker](https://docs.docker.com/engine/install/ubuntu/), [docker compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
 - These come preinstalled in github codespaces. Install if required
 - relevant commands
-    ```
+    ```bash
     docker compose up
     docker compose down --rmi all
     ```
@@ -51,3 +51,33 @@ Set up airflow
 
 ## dbt lineage
 ![dbt_lineage](/img/dbt_lineage.PNG)
+
+## [nba_data_pipeline dbt model](/airflow/dags/nba_data_pipeline/) directory tree
+
+```bash
+├── analyses
+├── macros
+│   ├── dataset_raw.sql
+│   └── project.sql
+├── models
+│   ├── core
+│   │   ├── core__nba_game_stats.sql
+│   │   └── core__nba_game_stats.yml
+│   ├── preprocessing
+│   │   ├── preprocessing__nba_games.sql
+│   │   ├── preprocessing__nba_games.yml
+│   │   ├── preprocessing__nba_players.sql
+│   │   ├── preprocessing__nba_players.yml
+│   │   ├── preprocessing__nba_players_game_stats.sql
+│   │   ├── preprocessing__nba_players_game_stats.yml
+│   │   ├── preprocessing__nba_team_standings.sql
+│   │   ├── preprocessing__nba_team_standings.yml
+│   │   ├── preprocessing__nba_teams.sql
+│   │   └── preprocessing__nba_teams.yml
+│   └── sources.yml
+├── seeds
+├── snapshots
+├── tests
+├── dbt_project.yml
+└── profiles.yml
+```

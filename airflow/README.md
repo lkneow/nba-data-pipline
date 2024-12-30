@@ -17,12 +17,12 @@ Following the no frills setup [here](https://github.com/DataTalksClub/data-engin
 ## Commands
 
 To start the local airflow instance
-```
+```bash
 docker compose up
 ```
 
 To shut down the airflow instance and remove all related images
-```
+```bash
 docker compose down --rmi all
 ```
 
