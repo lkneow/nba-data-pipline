@@ -6,6 +6,7 @@ Following the no frills setup [here](https://github.com/DataTalksClub/data-engin
     - https://datatalks.club/blog/how-to-setup-lightweight-local-version-for-airflow.html
 
 ## Notes
+- Airflow user and password will be `admin`, `admin`
 - `AIRFLOW_UID` is set to 1000
 - will have to run `mkdir -p ./dags ./logs ./plugins`
 - use [`.env_example`](.env_example) to make a `.env`

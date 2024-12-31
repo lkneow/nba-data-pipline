@@ -184,3 +184,4 @@ google-cloud-sdk
 creds*
 logs
 plugins
+.ruff*
