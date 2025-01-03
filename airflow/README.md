@@ -27,6 +27,12 @@ To shut down the airflow instance and remove all related images
 docker compose down --rmi all
 ```
 
+To run tests
+```bash
+docker compose up -d
+docker exec -it nba-pipeline-scheduler-1 pytest -v
+```
+
 ## References
 astronomer cosmos documentation: https://astronomer.github.io/astronomer-cosmos/getting_started/index.html
 

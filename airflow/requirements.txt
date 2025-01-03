@@ -1,3 +1,5 @@
 apache-airflow-providers-google==12.0.0
 # astronomer-cosmos==1.8.0
 astronomer-cosmos==1.8.1a1
+pytest-mock==3.14.0
+pytest==8.3.4

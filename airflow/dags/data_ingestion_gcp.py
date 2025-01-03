@@ -1,10 +1,10 @@
 import os
+import pendulum
 import requests
 import zipfile
 import re
 
 from airflow.decorators import dag, task, task_group
-from airflow.utils.dates import days_ago
 
 from google.cloud import storage
 from airflow.providers.google.cloud.transfers.local_to_gcs import (
@@ -13,9 +13,6 @@ from airflow.providers.google.cloud.transfers.local_to_gcs import (
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import (
     GCSToBigQueryOperator,
 )
-
-# import pyarrow.csv as pv
-# import pyarrow.parquet as pq
 
 GCP_PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
 GCP_GCS_DATA_BUCKET = os.environ.get("GCP_GCS_DATA_BUCKET")
@@ -34,14 +31,14 @@ default_args = {
     "owner": "airflow",
     "depends_on_past": False,
     "retries": 1,
-    "start_date": days_ago(1),  # Replace with your start date
+    "start_date": pendulum.today("UTC").add(days=-1),
+    "catchup": False,
+    "schedule": pendulum.duration(days=1),
 }
 
 
 @dag(
-    schedule_interval="@daily",
     default_args=default_args,
-    catchup=False,
     max_active_runs=1,
 )
 def data_ingestion_gcs_bigquery():
@@ -62,9 +59,11 @@ def data_ingestion_gcs_bigquery():
 
     @task
     def extract_zip(zip_file_path):
+        print(f"Extracting zip file: {zip_file_path}")
         with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
+            print("using extractall now")
             zip_ref.extractall(EXTRACT_DIR)
-        print(f"ZIP file extracted to {EXTRACT_DIR}")
+            print(f"ZIP file extracted to {EXTRACT_DIR}")
         return EXTRACT_DIR
 
     file_location = extract_zip(download_zip())

@@ -25,6 +25,7 @@ services:
             - ./plugins:/opt/airflow/plugins
             - ./scripts:/opt/airflow/scripts
             - ./creds:/.google/credentials:ro
+            - ./tests:/opt/airflow/tests
 
 
     webserver:
@@ -42,6 +43,7 @@ services:
             - ./plugins:/opt/airflow/plugins
             - ./creds:/.google/credentials:ro
             - ./scripts:/opt/airflow/scripts
+            - ./tests:/opt/airflow/tests
 
         user: "${AIRFLOW_UID:-50000}:0"
         ports:

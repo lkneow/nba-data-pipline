@@ -1,7 +1,7 @@
 import os
+import pendulum
 
 from airflow.decorators import dag
-from airflow.utils.dates import days_ago
 from cosmos import (
     DbtTaskGroup,
     ExecutionConfig,
@@ -56,34 +56,14 @@ default_args = {
     "owner": "airflow",
     "depends_on_past": False,
     "retries": 1,
-    "start_date": days_ago(1),  # Replace with your start date
+    "start_date": pendulum.today("UTC").add(days=-1),
     "catchup": False,
-    "schedule_interval": "@daily",
-}
-
-# simple_dag = DbtDag(
-#     # dbt/cosmos-specific parameters
-#     project_config=ProjectConfig(DBT_PROJECT_PATH),
-#     profile_config=profile_config,
-#     execution_config=execution_config,
-#     # normal dag parameters
-#     default_args=default_args,
-#     dag_id="nba_data_pipeline_dbt_dag"
-# )
-
-# Default arguments for the DAG
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "retries": 1,
-    "start_date": days_ago(1),  # Replace with your start date
+    "schedule": pendulum.duration(days=1),
 }
 
 
 @dag(
-    schedule_interval="@daily",
     default_args=default_args,
-    catchup=False,
     max_active_runs=1,
 )
 def nba_data_pipeline_dbt_dag() -> None:
