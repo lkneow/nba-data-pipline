@@ -26,9 +26,20 @@ Install [gcloud cli](https://cloud.google.com/sdk/docs/install#linux)
 - Steps are in `install-google-cli.sh`
 - will have to `chmod +x install-google-cli.sh` to run it if needed
 - will have to do `gcloud auth application-default login`
-`
+
+
 Install [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli#install-terraform)
 - other information will be in the [README.md](/terraform/README.md) under the terraform folder
+- terraform will create the necessary resources on GCP, a service account will also be created
+
+Download GCP service account json key file
+
+```bash
+mkdir ./airflow/creds
+
+gcloud iam service-accounts keys create ./airflow/creds/google_credentials.json \
+    --iam-account=SA_NAME@PROJECT_ID.iam.gserviceaccount.com
+```
 
 Install [docker](https://docs.docker.com/engine/install/ubuntu/), [docker compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
 - These come preinstalled in github codespaces. Install if required
